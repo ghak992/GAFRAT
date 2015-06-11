@@ -6,4 +6,4 @@
     
 
 
-echo count(DBoperations::getLogsScreenshot(3));
+    print_r(DBoperations::SignIn(1234));

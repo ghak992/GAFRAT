@@ -91,13 +91,15 @@ class DBoperations {
                                     CROSS JOIN admin
                                     INNER JOIN log_type
                                       ON log.log_type = log_type.log_type_id
-                                  ORDER BY log.log_create_date
+                                  ORDER BY log.log_create_date desc
                                   LIMIT ' . intval($selectfrom) . ' , ' . intval($selectamount) . '');
             $stmt->execute();
             $result = $stmt->fetchAll();
             $response = array("status" => "false", "data" => "");
+            $serialnumber = $selectfrom + 1;
             $log = array(
                 "id" => "",
+                "serialnumber" => "",
                 "desc" => "",
                 "createdate" => "",
                 "type" => "",
@@ -107,7 +109,9 @@ class DBoperations {
             $data = array();
             foreach ($result as $row) {
                 $log['id'] = $row['log_id'];
-                $log['desc'] = $row['description'];
+                $log['serialnumber'] = $serialnumber;
+                $serialnumber++;
+                $log['desc'] = str_replace("'", "\'", $row['description']); 
                 $log['createdate'] = $row['createdate'];
                 $log['type'] = $row['log_type_title'];
                 $log['creatorname'] = $row['log_creator_name'];

@@ -35,10 +35,30 @@
         <script src="../js/jquery.tmpl.min.js" type="text/javascript"></script>
         <script src="../js/jquery.tmplPlus.min.js" type="text/javascript"></script>
         <script src="../js/logs.js" type="text/javascript"></script>
-        
-        
+
+
         <script id="LogsListTemplate" type="text/x-jquery-tmpl">
-        
+            <tr>
+                            <td>${serialnumber}</td>
+                            <td>${type}</td>
+                            <td>${creatorname}</td>
+                            <td>${createdate}</td>
+                            <td>
+                                <span 
+                                    onclick="LogsListOperations.setlogsdesc('${desc}')"
+                                    data-toggle="modal" data-target="#desc_modal"   
+                                    class="btn btn-default btn-sm btn-block">
+                                    <i class="fa fa-file-text"></i>
+                                </span>
+                            </td>
+                            <td><span
+                                    onclick="LogsListOperations.setLogScreenshots('${id}')"
+                                    data-toggle="modal" data-target="#logscreenshots_modal"
+                                    class="btn btn-default btn-sm btn-block">
+                                    <i class="fa fa-image"></i>
+                                </span>
+                            </td>
+                        </tr>
         </script>
     </body>
 </html>

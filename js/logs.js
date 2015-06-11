@@ -58,28 +58,27 @@ $(document).ready(function () {
                 encode: true,
                 timeout: 10000, //10 second timeout, 
                 beforeSend: function (xhr) {
-                   $("#logscreenshots_modal_image").html('<i class="fa fa-spinner fa-pulse fa-5x"></i>');
+                    $("#logscreenshots_modal_image").html('<i class="fa fa-spinner fa-pulse fa-5x"></i>');
                 },
                 complete: function (jqXHR, textStatus) {
-                    
+
                 },
                 success: function (data, textStatus, jqXHR) {
-                    console.log(data);
                     var count = Object.keys(data).length;
-                    if(count > 0){
-                       var html = "";
+                    if (count > 0) {
+                        var html = "";
                         $.each(data, function (id, Screenshots) {
                             html = html +
                                     '<img src="'
-                                    +Screenshots.log_screenshot_path+
-                                    Screenshots.log_screenshot_name+
+                                    + Screenshots.log_screenshot_path +
+                                    Screenshots.log_screenshot_name +
                                     '"/><br><br>';
                         });
-                         $("#logscreenshots_modal_image").html(html);  
-                    }else{
+                        $("#logscreenshots_modal_image").html(html);
+                    } else {
                         $("#logscreenshots_modal_image").html("<h3>there no screenshot for this log</h3>");
                     }
-                       
+
                 }, error: function (jqXHR, textStatus, errorThrown) {
                     if (textStatus === "timeout") {
                         $("#logscreenshots_modal_image").html("<h3>time is out</h3>");
@@ -88,6 +87,52 @@ $(document).ready(function () {
                     }
                 }
             });
+        },
+        nextLogsList: function (selectfrom, selectamount) {
+            Data = {
+                'destination': 'logsnextlist',
+                'selectfrom': selectfrom,
+                'selectamount': selectamount
+            };
+            $.ajax({
+                type: 'POST',
+                url: mainrequesturl,
+                data: Data,
+                dataType: 'json',
+                encode: true,
+                timeout: 10000, //10 second timeout, 
+                beforeSend: function (xhr) {
+                    $("#logstable-message").html('<center><i class="fa fa-spinner fa-pulse fa-3x"></i></center>');
+                },
+                complete: function (jqXHR, textStatus) {
+                    $("#logstable-message").html('');
+                },
+                success: function (data, textStatus, jqXHR) {
+                    if (data.status == "true") {
+                        if (data.data.length === 0) {
+                            $(".load-more").hide();
+                        } else {
+                            $(".list-nav").css("background", "#ffffff");
+                            $(".list-nav").css("color", "#000");
+                            $("#list-nav-button" + selectfrom).css("background", "#080808");
+                            $("#list-nav-button" + selectfrom).css("color", "#ffffff");
+                            $("#logstable-tbody").html("");
+                            $("#LogsListTemplate").tmpl(data.data).appendTo("#logstable-tbody");
+                        }
+
+                    } else if (data.status === "false") {
+                        alert("error")
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    if (textStatus === "timeout") {
+                        $("#logstable-message").html("<h5>time is out</h5>");
+                    } else {
+                        $("#logstable-message").html("<h5>unexpected error please try again</h5>");
+                    }
+                }
+            });
+
         }
     };
 

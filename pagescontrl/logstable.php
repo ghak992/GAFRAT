@@ -20,10 +20,10 @@
                         <th></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="logstable-tbody">
 
                     <?php
-                    $selectamount = 25;
+                    $selectamount = 12;
                     $logslist = DBoperations::getLogsList(0, $selectamount);
                     $num = 1;
                     foreach ($logslist["data"] as $log) {
@@ -34,11 +34,8 @@
                             <td><?php echo $log["creatorname"] ?></td>
                             <td><?php echo $log["createdate"] ?></td>
                             <td>
-                                <?php 
-                                $desc = str_replace("'", "\'", $log["desc"]);
-                                ?>
                                 <span 
-                                    onclick="LogsListOperations.setlogsdesc('<?PHP echo $desc; ?>')"
+                                    onclick="LogsListOperations.setlogsdesc('<?PHP echo $log["desc"] ?>')"
                                     data-toggle="modal" data-target="#desc_modal"   
                                     class="btn btn-default btn-sm btn-block">
                                     <i class="fa fa-file-text"></i>
@@ -55,7 +52,7 @@
                         <?php
                     }
                     ?>
-                    <tr>
+<!--                    <tr>
                         <td>1</td>
                         <td>Mark</td>
                         <td>Otto</td>
@@ -68,7 +65,7 @@
                                 <i class="fa fa-image"></i>
                             </span>
                         </td>
-                    </tr>
+                    </tr>-->
                 </tbody>
             </table>
             <div class="panel-footer">
@@ -86,10 +83,12 @@
                             $roundnum = 1;
                             for ($index = 0; $index < $pages; $index++) {
                                 ?>
-                                <li>
+                            <li >
                                     <span 
-                                        onclick="('<?php echo $selectfrom; ?>', '<?php echo $selectamount ?>')"
-                                        class="btn" style="border-radius: 0px;">
+                                        style="<?php echo ($selectfrom == 0)?  'background: #080808; color: #ffffff' :  ''; ?>"
+                                        id="list-nav-button<?php echo $selectfrom; ?>"
+                                        onclick="LogsListOperations.nextLogsList('<?php echo $selectfrom; ?>', '<?php echo $selectamount ?>')"
+                                        class="btn list-nav" style="border-radius: 0px;">
                                         <?php echo $index + 1; ?>
                                     </span>
                                 </li>
@@ -102,6 +101,9 @@
                         </ul>
                     </nav>
                 </center>
+                <div id="logstable-message">
+                    
+                </div>
             </div>
         </div>
     </div>
