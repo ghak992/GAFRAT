@@ -13,8 +13,9 @@
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr class="filters">
-                        <th><input type="text" class="form-control" placeholder="#" disabled></th>
+                        <th></th>
                         <th><input type="text" class="form-control" placeholder="Type" disabled></th>
+                        <th><input type="text" class="form-control" placeholder="Title" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Solve By" disabled></th>
                         <th><input type="text" class="form-control" placeholder="Add Date" disabled hidden></th>
                         <th></th>
@@ -31,11 +32,12 @@
                         <tr>
                             <td><?php echo $num;$num++;?></td>
                             <td><?php echo $log["type"] ?></td>
+                            <td><?php echo $log["title"] ?></td>
                             <td><?php echo $log["creatorname"] ?></td>
                             <td><?php echo $log["createdate"] ?></td>
                             <td>
                                 <span 
-                                    onclick="LogsListOperations.setlogsdesc('<?PHP echo $log["desc"] ?>')"
+                                    onclick="LogsListOperations.setLogDescription('<?PHP echo $log["id"]; ?>')"
                                     data-toggle="modal" data-target="#desc_modal"   
                                     class="btn btn-default btn-sm btn-block">
                                     <i class="fa fa-file-text"></i>

@@ -42,9 +42,6 @@ $(document).ready(function () {
     });
 
     LogsListOperations = {
-        setlogsdesc: function (desc) {
-            $("#desc_modal_desc_text").text(desc);
-        },
         setLogScreenshots: function (logid) {
             var Data = {
                 'destination': 'logScreenshots',
@@ -83,7 +80,36 @@ $(document).ready(function () {
                     if (textStatus === "timeout") {
                         $("#logscreenshots_modal_image").html("<h3>time is out</h3>");
                     } else {
-                        $("#main-signin-form-message").html("<h3>unexpected error please try again</h3>");
+                        $("#logscreenshots_modal_image").html("<h3>unexpected error please try again</h3>");
+                    }
+                }
+            });
+        },
+        setLogDescription: function (logid) {
+            var Data = {
+                'destination': 'logDescription',
+                'logid': logid
+            };
+            $.ajax({
+                type: 'POST',
+                url: mainrequesturl,
+                data: Data,
+                dataType: 'json',
+                encode: true,
+                timeout: 10000, //10 second timeout, 
+                beforeSend: function (xhr) {
+                    $("#desc_modal_desc_text").html('<i class="fa fa-spinner fa-pulse fa-5x"></i>');
+                },
+                complete: function (jqXHR, textStatus) {
+                    
+                },
+                success: function (data, textStatus, jqXHR) {
+                    $("#desc_modal_desc_text").html("<h4>"+data.desc+"</h4>");
+                }, error: function (jqXHR, textStatus, errorThrown) {
+                    if (textStatus === "timeout") {
+                        $("#desc_modal_desc_text").html("<h3>time is out</h3>");
+                    } else {
+                        $("#desc_modal_desc_text").html("<h3>unexpected error please try again</h3>");
                     }
                 }
             });

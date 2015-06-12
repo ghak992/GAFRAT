@@ -2,6 +2,7 @@
 <html>
     <head>
         <?php
+        include  '../server/auth.php';
         require_once '../includefile/header.php';
         require_once '../server/config.php';
         require_once '../server/DBoperations.php';
@@ -13,10 +14,6 @@
         </style>
     </head>
     <body>
-        <?php
-        // put your code here
-        ?>
-
         <?php
         include_once '../includefile/navbar.php';
         ?>
@@ -41,11 +38,12 @@
             <tr>
                             <td>${serialnumber}</td>
                             <td>${type}</td>
+                            <td>${title}</td>
                             <td>${creatorname}</td>
                             <td>${createdate}</td>
                             <td>
                                 <span 
-                                    onclick="LogsListOperations.setlogsdesc('${desc}')"
+                                    onclick="LogsListOperations.setLogDescription('${id}')"
                                     data-toggle="modal" data-target="#desc_modal"   
                                     class="btn btn-default btn-sm btn-block">
                                     <i class="fa fa-file-text"></i>

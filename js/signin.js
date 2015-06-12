@@ -3,7 +3,8 @@ $(document).ready(function () {
         event.preventDefault();
         var Data = {
             'destination': 'signin',
-            'inuserpass': $('#main-signin-form #inpass').val()
+            'inuserpass': $('#main-signin-form #inpass').val(),
+            'inuseremail': $('#main-signin-form #inmail').val()
         };
         $.ajax({
             type: 'POST',
@@ -20,7 +21,7 @@ $(document).ready(function () {
             },
             success: function (data, textStatus, jqXHR) {
                 if (data.status == "false") {
-                    $("#main-signin-form-message").text(data.message);
+                    $("#main-signin-form-message").text("check your information");
                 } else {
                     window.location.assign(mainurl+"/pages/logs.php");
                 }

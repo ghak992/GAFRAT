@@ -1,3 +1,7 @@
+<?php
+session_start();
+session_destroy();
+?>
 <div id="signin-form">
     <div class="container">
     <div class="row">
@@ -20,14 +24,14 @@
                 <form 
                     id="main-signin-form"
                     class="form-signin">
-<!--                    <input 
+                    <div  class="form-group has-success">
+                    <input 
                         type="email" 
                         class="form-control"
                         name="inmail"
                         id="inmail"
                         placeholder="email"
-                        required autofocus>-->
-                    <div  class="form-group has-success">
+                        required autofocus>
                         <input 
                         type="password" 
                         class="form-control"

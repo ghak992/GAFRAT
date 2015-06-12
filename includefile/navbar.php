@@ -15,13 +15,13 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
      
       <ul class="nav navbar-nav">
-        <li><a href="#">logs</a></li>
-        <li><a href="#">new logs</a></li>
+          <li><a href="../pages/logs.php">logs</a></li>
+          <li><a href="../pages/newlog.php">new logs</a></li>
       </ul>
         
       <ul class="nav navbar-nav navbar-right">
         <li>
-            <a href="#">
+            <a href="../index.php">
                 sign out
                 <i class="fa fa-sign-out"></i>
             </a>
